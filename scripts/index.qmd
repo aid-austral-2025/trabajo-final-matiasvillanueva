@@ -22,6 +22,7 @@ Para este análisis se utilizó el dataset "Video Game Sales" disponible públic
 
 ### Variables Utilizadas
 El dataset original incluye las siguientes variables relevantes para nuestro estudio:
+
 - **Nombre del juego** (Name): Identificador principal del título
 - **Plataforma** (Platform): Consola para la cual fue desarrollado el juego
 - **Año de lanzamiento** (Year): Período temporal de interés (1986-2016)
@@ -32,6 +33,7 @@ El dataset original incluye las siguientes variables relevantes para nuestro est
 
 ### Criterios de Selección
 Se aplicaron los siguientes filtros al dataset original:
+
 - Período temporal: 1986-2016 (30 años de data relevante)
 - Clasificación de consolas por origen:
   * **Consolas americanas**: Atari, Xbox, Xbox 360, Xbox One

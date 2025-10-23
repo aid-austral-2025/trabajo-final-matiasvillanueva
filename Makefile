@@ -1,6 +1,6 @@
 # Generar reporte HTML
 index.html: scripts/index.qmd
-	cd scripts && Rscript -e "quarto::quarto_render('index.qmd')" && mv index.html index_files ../
+	quarto render scripts/index.qmd --output-dir .
 
 # Limpiar archivos generados
 clean:
