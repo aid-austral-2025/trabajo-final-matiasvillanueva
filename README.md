@@ -9,7 +9,9 @@ URL del sitio desplegado: https://aid-austral-2025.github.io/trabajo-final-matia
 ### Comandos disponibles
 
 make          - Genera el reporte HTML
+
 make clean    - Elimina los archivos generados  
+
 make help     - Muestra esta ayuda
 
 ### Instrucciones
