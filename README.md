@@ -1,3 +1,31 @@
 # Trabajo Final
 
-Repo con el enunciado y los materiales para la entrega final en **Análisis Inteligente de Datos**.
+Repo con el enunciado y los materiales para la entrega final en Análisis Inteligente de Datos.
+
+URL del sitio desplegado: https://mvillanueva.github.io/aid-austral-2025/trabajo-final-matiasvillanueva
+
+## Cómo usar Make
+
+### Comandos disponibles
+
+make          - Genera el reporte HTML
+make clean    - Elimina los archivos generados  
+make help     - Muestra esta ayuda
+
+### Instrucciones
+
+1. Generar el reporte:
+   make
+   Esto compila scripts/index.qmd y genera index.html en la carpeta principal.
+
+2. Ver el resultado:
+   Abre index.html en tu navegador.
+
+3. Limpiar:
+   make clean
+   Elimina los archivos generados.
+
+### Requisitos
+- Tener instalado make
+- Tener instalado quarto 
+- Tener instalado R
