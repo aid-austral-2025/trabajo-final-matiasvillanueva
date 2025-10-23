@@ -1,7 +1,7 @@
 ---
 title: "Análisis de Penetración Cruzada de Videojuegos entre América y Japón (1986-2016)"
 author: "Matias Villanueva"
-date: "2025"
+date: "30 de Noviembre, 2025"
 format: html
 ---
 
