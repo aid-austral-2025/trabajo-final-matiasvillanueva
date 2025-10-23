@@ -2,7 +2,7 @@
 
 Repo con el enunciado y los materiales para la entrega final en Análisis Inteligente de Datos.
 
-URL del sitio desplegado: https://mvillanueva.github.io/aid-austral-2025/trabajo-final-matiasvillanueva
+URL del sitio desplegado: https://aid-austral-2025.github.io/trabajo-final-matiasvillanueva/
 
 ## Cómo usar Make
 
