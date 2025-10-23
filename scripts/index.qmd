@@ -1,27 +1,60 @@
 ---
-title: "index"
-format: html
-editor: visual
+title: "Análisis de Penetración Cruzada de Videojuegos entre América y Japón (1986-2016)"
 author: "Matias Villanueva"
+date: "2025"
+format: html
 ---
 
-## Quarto
+# Introducción
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+El mercado de videojuegos ha experimentado un crecimiento exponencial desde sus inicios en la década de 1980, convirtiéndose en una de las industrias de entretenimiento más lucrativas a nivel global. Dos de los actores más significativos en este ecosistema han sido históricamente América (principalmente Estados Unidos) y Japón, naciones que no solo han desarrollado algunas de las consolas más icónicas y exitosas, sino que también han cultivado audiencias masivas y leales de jugadores.
 
-## Running Code
+Este estudio busca analizar la dinámica de penetración cultural y comercial entre estos dos mercados clave durante el período 1986-2016. Específicamente, investigaremos cómo los videojuegos desarrollados para consolas americanas fueron recibidos en el mercado japonés, y viceversa, cómo los títulos diseñados para consolas japonesas fueron adoptados en el mercado americano. Este análisis es particularmente relevante considerando que ambas regiones han mantenido tradiciones de juego distintivas, preferencias culturales específicas y ecosistemas de desarrollo particulares que han influido en la aceptación de productos foráneos.
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+La hipótesis subyacente sugiere que existen asimetrías significativas en la recepción cruzada de videojuegos, posiblemente influenciadas por factores culturales, de diseño y de marketing. Comprender estas dinámicas no solo aporta insight histórico sobre la evolución de la industria, sino que también puede informar estrategias de localización y distribución para desarrolladores y publicadores contemporáneos.
 
-```{r}
-1 + 1
-```
+# Materiales y Métodos
 
-You can add options to executable code like this
+## Selección de Datos
 
-```{r}
-#| echo: false
-2 * 2
-```
+### Fuente de Datos
+Para este análisis se utilizó el dataset "Video Game Sales" disponible públicamente, que contiene información histórica sobre ventas de videojuegos desde 1980 hasta 2016. Este conjunto de datos ha sido ampliamente utilizado en análisis previos de la industria del gaming y proporciona una cobertura comprehensiva del período de interés.
 
-The `echo: false` option disables the printing of code (only output is displayed).
+### Variables Utilizadas
+El dataset original incluye las siguientes variables relevantes para nuestro estudio:
+- **Nombre del juego** (Name): Identificador principal del título
+- **Plataforma** (Platform): Consola para la cual fue desarrollado el juego
+- **Año de lanzamiento** (Year): Período temporal de interés (1986-2016)
+- **Género** (Genre): Categorización temática del juego
+- **Publicador** (Publisher): Empresa responsable de la distribución
+- **Ventas regionales**: NA_Sales (América del Norte), EU_Sales (Europa), JP_Sales (Japón), Other_Sales (Resto del mundo)
+- **Ventas globales** (Global_Sales): Cifra total de ventas
+
+### Criterios de Selección
+Se aplicaron los siguientes filtros al dataset original:
+- Período temporal: 1986-2016 (30 años de data relevante)
+- Clasificación de consolas por origen:
+  * **Consolas americanas**: Atari, Xbox, Xbox 360, Xbox One
+  * **Consolas japonesas**: Nintendo (NES, SNES, N64, GameCube, Wii, Wii U, Switch), Sony (PlayStation, PS2, PS3, PS4), Sega (Master System, Genesis, Saturn, DreamCast)
+- Exclusión de plataformas PC y móviles para focalizar el análisis en el mercado de consolas
+
+## Limpieza y Procesamiento de Datos
+
+### Evaluación Inicial
+La exploración inicial del dataset reveló la necesidad de aplicar los siguientes procedimientos de limpieza:
+
+1. **Manejo de valores faltantes**:
+   - Eliminación de registros con año de lanzamiento faltante.
+   - Imputación de ventas regionales missing con valor cero, asumiendo que la ausencia indica ventas insignificantes.
+
+2. **Consistencia de datos**:
+   - Verificación de integridad entre ventas regionales y globales
+   - Corrección de outliers evidentes en datos de ventas
+
+3. **Clasificación de plataformas**:
+   - Asignación sistemática de cada plataforma a su país de origen (América vs Japón)
+   - Validación cruzada con fuentes históricas de la industria
+
+4. **Agregación temporal**:
+   - Agrupación de datos por períodos anuales para facilitar el análisis de tendencias
+   - Cálculo de métricas agregadas por plataforma, género y región
