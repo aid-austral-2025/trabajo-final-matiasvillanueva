@@ -1,62 +1,71 @@
----
-title: "Análisis de Penetración Cruzada de Videojuegos entre América y Japón (1986-2016)"
-author: "Matias Villanueva"
-date: "30 de Noviembre, 2025"
-format: html
----
+----
+-title: "Análisis de Penetración Cruzada de Videojuegos entre América y Japón (1986-2016)"
+-author: "Matias Villanueva"
+-date: 2025-11-30
+-format: html
+----
 
 # Introducción
 
-El mercado de videojuegos ha experimentado un crecimiento exponencial desde sus inicios en la década de 1980, convirtiéndose en una de las industrias de entretenimiento más lucrativas a nivel global. Dos de los actores más significativos en este ecosistema han sido históricamente América (principalmente Estados Unidos) y Japón, naciones que no solo han desarrollado algunas de las consolas más icónicas y exitosas, sino que también han cultivado audiencias masivas y leales de jugadores.
+El mercado de videojuegos ha experimentado un crecimiento exponencial desde sus inicios, convirtiéndose en una de las industrias de entretenimiento más lucrativas a nivel global. Dos de los actores más significativos han sido históricamente **América (principalmente Estados Unidos)** y **Japón**, naciones que han desarrollado consolas icónicas y cultivado audiencias masivas.
 
-Este estudio busca analizar la dinámica de penetración cultural y comercial entre estos dos mercados clave durante el período 1986-2016. Específicamente, investigaremos cómo los videojuegos desarrollados para consolas americanas fueron recibidos en el mercado japonés, y viceversa, cómo los títulos diseñados para consolas japonesas fueron adoptados en el mercado americano. Este análisis es particularmente relevante considerando que ambas regiones han mantenido tradiciones de juego distintivas, preferencias culturales específicas y ecosistemas de desarrollo particulares que han influido en la aceptación de productos foráneos.
+Este estudio busca analizar la dinámica comercial entre estos dos mercados clave durante el período **1986-2016**, específicamente investigando cómo las ventas de videojuegos variaron según el origen de las consolas y las regiones de comercialización. El análisis se centra en los **patrones de ventas cruzadas entre estas regiones**.
 
-La hipótesis subyacente sugiere que existen asimetrías significativas en la recepción cruzada de videojuegos, posiblemente influenciadas por factores culturales, de diseño y de marketing. Comprender estas dinámicas no solo aporta insight histórico sobre la evolución de la industria, sino que también puede informar estrategias de localización y distribución para desarrolladores y publicadores contemporáneos.
+---
 
 # Materiales y Métodos
 
-## Selección de Datos
+## Fuente de Datos
 
-### Fuente de Datos
-Para este análisis se utilizó el dataset "Video Game Sales" disponible públicamente, que contiene información histórica sobre ventas de videojuegos desde 1980 hasta 2016. Este conjunto de datos ha sido ampliamente utilizado en análisis previos de la industria del gaming y proporciona una cobertura comprehensiva del período de interés.
+Para este análisis se utilizó el dataset *"Video Game Sales"*, que contiene información histórica sobre ventas de videojuegos desde **1980 hasta 2016**, con cobertura comprehensiva del período de interés.
 
-### Variables Utilizadas
-El dataset original incluye las siguientes variables relevantes para nuestro estudio:
+## Variables Utilizadas
 
-- **Nombre del juego** (Name): Identificador principal del título
-- **Plataforma** (Platform): Consola para la cual fue desarrollado el juego
-- **Año de lanzamiento** (Year): Período temporal de interés (1986-2016)
-- **Género** (Genre): Categorización temática del juego
-- **Publicador** (Publisher): Empresa responsable de la distribución
-- **Ventas regionales**: NA_Sales (América del Norte), EU_Sales (Europa), JP_Sales (Japón), Other_Sales (Resto del mundo)
-- **Ventas globales** (Global_Sales): Cifra total de ventas
+Del dataset original se emplearon las siguientes variables:
 
-### Criterios de Selección
-Se aplicaron los siguientes filtros al dataset original:
+- **Nombre del juego (Name):** Identificador del título  
+- **Plataforma (Platform):** Consola de destino  
+- **Año de lanzamiento (Year):** Período 1986-2016  
+- **Género (Genre):** Categorización del juego  
+- **Publicador (Publisher):** Empresa distribuidora  
+- **Ventas regionales:** `NA_Sales` (América del Norte), `JP_Sales` (Japón)  
+- **Ventas globales (Global_Sales):** Total mundial
 
-- Período temporal: 1986-2016 (30 años de data relevante)
-- Clasificación de consolas por origen:
-  * **Consolas americanas**: Atari, Xbox, Xbox 360, Xbox One
-  * **Consolas japonesas**: Nintendo (NES, SNES, N64, GameCube, Wii, Wii U, Switch), Sony (PlayStation, PS2, PS3, PS4), Sega (Master System, Genesis, Saturn, DreamCast)
-- Exclusión de plataformas PC y móviles para focalizar el análisis en el mercado de consolas
+## Criterios de Selección
 
-## Limpieza y Procesamiento de Datos
+Se aplicaron los siguientes filtros:
 
-### Evaluación Inicial
-La exploración inicial del dataset reveló la necesidad de aplicar los siguientes procedimientos de limpieza:
+- **Período temporal:** 1986-2016  
+- **Clasificación de consolas por origen:**  
+  - Consolas **americanas:** Xbox, Xbox 360, Xbox One  
+  - Consolas **japonesas:** Nintendo (NES, SNES, N64, GameCube, Wii), Sony (PlayStation, PS2, PS3, PS4), Sega (Genesis, Saturn, DreamCast)  
+- **Exclusión** de plataformas PC y móviles para focalizar en el mercado de consolas
 
-1. **Manejo de valores faltantes**:
-   - Eliminación de registros con año de lanzamiento faltante.
-   - Imputación de ventas regionales missing con valor cero, asumiendo que la ausencia indica ventas insignificantes.
+---
 
-2. **Consistencia de datos**:
-   - Verificación de integridad entre ventas regionales y globales
-   - Corrección de outliers evidentes en datos de ventas
+# Procesamiento de Datos
 
-3. **Clasificación de plataformas**:
-   - Asignación sistemática de cada plataforma a su país de origen (América vs Japón)
-   - Validación cruzada con fuentes históricas de la industria
+## Limpieza de Datos
 
-4. **Agregación temporal**:
-   - Agrupación de datos por períodos anuales para facilitar el análisis de tendencias
-   - Cálculo de métricas agregadas por plataforma, género y región
+1. **Manejo de valores faltantes:**  
+   - Eliminación de registros con año de lanzamiento faltante  
+   - Imputación de ventas regionales faltantes con valor cero  
+
+2. **Clasificación de plataformas:**  
+   - Asignación sistemática de cada plataforma a su país de origen  
+   - Validación con fuentes históricas de la industria  
+
+3. **Agregación de datos:**  
+   - Cálculo de métricas agregadas por plataforma, género y región  
+   - Análisis comparativo de patrones de ventas regionales
+
+---
+
+## Enfoque Analítico
+
+El análisis se centrará en:
+
+- Comparar **volúmenes de ventas entre regiones (NA vs JP)**  
+- Analizar **diferencias en preferencias de género por región**  
+- Evaluar el **desempeño comercial cruzado** (juegos en consolas americanas en Japón vs juegos en consolas japonesas en América)  
+- Identificar **tendencias temporales en la penetración comercial entre mercados**
