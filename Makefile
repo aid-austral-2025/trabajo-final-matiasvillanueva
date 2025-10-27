@@ -1,6 +1,6 @@
 # Generar reporte HTML
 index.html: scripts/index.qmd
-	quarto render scripts/index.qmd --output-dir .
+	quarto render scripts/index.qmd --output-dir ../ --execute-dir ..
 
 # Limpiar archivos generados
 clean:

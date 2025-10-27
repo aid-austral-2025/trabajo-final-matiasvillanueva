@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Matias Villanueva">
 
-<title>Análisis de Penetración Cruzada de Videojuegos entre América y Japón (1986-2016)</title>
+<title>index</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,106 +43,96 @@ ul.task-list li input[type="checkbox"] {
 
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Análisis de Penetración Cruzada de Videojuegos entre América y Japón (1986-2016)</h1>
-</div>
 
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Matias Villanueva </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 <section id="introducción" class="level1">
 <h1>Introducción</h1>
-<p>El mercado de videojuegos ha experimentado un crecimiento exponencial desde sus inicios en la década de 1980, convirtiéndose en una de las industrias de entretenimiento más lucrativas a nivel global. Dos de los actores más significativos en este ecosistema han sido históricamente América (principalmente Estados Unidos) y Japón, naciones que no solo han desarrollado algunas de las consolas más icónicas y exitosas, sino que también han cultivado audiencias masivas y leales de jugadores.</p>
-<p>Este estudio busca analizar la dinámica de penetración cultural y comercial entre estos dos mercados clave durante el período 1986-2016. Específicamente, investigaremos cómo los videojuegos desarrollados para consolas americanas fueron recibidos en el mercado japonés, y viceversa, cómo los títulos diseñados para consolas japonesas fueron adoptados en el mercado americano. Este análisis es particularmente relevante considerando que ambas regiones han mantenido tradiciones de juego distintivas, preferencias culturales específicas y ecosistemas de desarrollo particulares que han influido en la aceptación de productos foráneos.</p>
-<p>La hipótesis subyacente sugiere que existen asimetrías significativas en la recepción cruzada de videojuegos, posiblemente influenciadas por factores culturales, de diseño y de marketing. Comprender estas dinámicas no solo aporta insight histórico sobre la evolución de la industria, sino que también puede informar estrategias de localización y distribución para desarrolladores y publicadores contemporáneos.</p>
+<p>El mercado de videojuegos ha experimentado un crecimiento exponencial desde sus inicios, convirtiéndose en una de las industrias de entretenimiento más lucrativas a nivel global. Dos de los actores más significativos han sido históricamente <strong>América (principalmente Estados Unidos)</strong> y <strong>Japón</strong>, naciones que han desarrollado consolas icónicas y cultivado audiencias masivas.</p>
+<p>Este estudio busca analizar la dinámica comercial entre estos dos mercados clave durante el período <strong>1986-2016</strong>, específicamente investigando cómo las ventas de videojuegos variaron según el origen de las consolas y las regiones de comercialización. El análisis se centra en los <strong>patrones de ventas cruzadas entre estas regiones</strong>.</p>
+<hr>
 </section>
 <section id="materiales-y-métodos" class="level1">
 <h1>Materiales y Métodos</h1>
-<section id="selección-de-datos" class="level2">
-<h2 class="anchored" data-anchor-id="selección-de-datos">Selección de Datos</h2>
-<section id="fuente-de-datos" class="level3">
-<h3 class="anchored" data-anchor-id="fuente-de-datos">Fuente de Datos</h3>
-<p>Para este análisis se utilizó el dataset “Video Game Sales” disponible públicamente, que contiene información histórica sobre ventas de videojuegos desde 1980 hasta 2016. Este conjunto de datos ha sido ampliamente utilizado en análisis previos de la industria del gaming y proporciona una cobertura comprehensiva del período de interés.</p>
+<section id="fuente-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="fuente-de-datos">Fuente de Datos</h2>
+<p>Para este análisis se utilizó el dataset <em>“Video Game Sales”</em>, que contiene información histórica sobre ventas de videojuegos desde <strong>1980 hasta 2016</strong>, con cobertura comprehensiva del período de interés.</p>
 </section>
-<section id="variables-utilizadas" class="level3">
-<h3 class="anchored" data-anchor-id="variables-utilizadas">Variables Utilizadas</h3>
-<p>El dataset original incluye las siguientes variables relevantes para nuestro estudio:</p>
+<section id="variables-utilizadas" class="level2">
+<h2 class="anchored" data-anchor-id="variables-utilizadas">Variables Utilizadas</h2>
+<p>Del dataset original se emplearon las siguientes variables:</p>
 <ul>
-<li><strong>Nombre del juego</strong> (Name): Identificador principal del título</li>
-<li><strong>Plataforma</strong> (Platform): Consola para la cual fue desarrollado el juego</li>
-<li><strong>Año de lanzamiento</strong> (Year): Período temporal de interés (1986-2016)</li>
-<li><strong>Género</strong> (Genre): Categorización temática del juego</li>
-<li><strong>Publicador</strong> (Publisher): Empresa responsable de la distribución</li>
-<li><strong>Ventas regionales</strong>: NA_Sales (América del Norte), EU_Sales (Europa), JP_Sales (Japón), Other_Sales (Resto del mundo)</li>
-<li><strong>Ventas globales</strong> (Global_Sales): Cifra total de ventas</li>
+<li><strong>Nombre del juego (Name):</strong> Identificador del título<br>
+</li>
+<li><strong>Plataforma (Platform):</strong> Consola de destino<br>
+</li>
+<li><strong>Año de lanzamiento (Year):</strong> Período 1986-2016<br>
+</li>
+<li><strong>Género (Genre):</strong> Categorización del juego<br>
+</li>
+<li><strong>Publicador (Publisher):</strong> Empresa distribuidora<br>
+</li>
+<li><strong>Ventas regionales:</strong> <code>NA_Sales</code> (América del Norte), <code>JP_Sales</code> (Japón)<br>
+</li>
+<li><strong>Ventas globales (Global_Sales):</strong> Total mundial</li>
 </ul>
 </section>
-<section id="criterios-de-selección" class="level3">
-<h3 class="anchored" data-anchor-id="criterios-de-selección">Criterios de Selección</h3>
-<p>Se aplicaron los siguientes filtros al dataset original:</p>
+<section id="criterios-de-selección" class="level2">
+<h2 class="anchored" data-anchor-id="criterios-de-selección">Criterios de Selección</h2>
+<p>Se aplicaron los siguientes filtros:</p>
 <ul>
-<li>Período temporal: 1986-2016 (30 años de data relevante)</li>
-<li>Clasificación de consolas por origen:
+<li><strong>Período temporal:</strong> 1986-2016<br>
+</li>
+<li><strong>Clasificación de consolas por origen:</strong>
 <ul>
-<li><strong>Consolas americanas</strong>: Atari, Xbox, Xbox 360, Xbox One</li>
-<li><strong>Consolas japonesas</strong>: Nintendo (NES, SNES, N64, GameCube, Wii, Wii U, Switch), Sony (PlayStation, PS2, PS3, PS4), Sega (Master System, Genesis, Saturn, DreamCast)</li>
+<li>Consolas <strong>americanas:</strong> Xbox, Xbox 360, Xbox One<br>
+</li>
+<li>Consolas <strong>japonesas:</strong> Nintendo (NES, SNES, N64, GameCube, Wii), Sony (PlayStation, PS2, PS3, PS4), Sega (Genesis, Saturn, DreamCast)<br>
+</li>
 </ul></li>
-<li>Exclusión de plataformas PC y móviles para focalizar el análisis en el mercado de consolas</li>
+<li><strong>Exclusión</strong> de plataformas PC y móviles para focalizar en el mercado de consolas</li>
 </ul>
+<hr>
 </section>
 </section>
-<section id="limpieza-y-procesamiento-de-datos" class="level2">
-<h2 class="anchored" data-anchor-id="limpieza-y-procesamiento-de-datos">Limpieza y Procesamiento de Datos</h2>
-<section id="evaluación-inicial" class="level3">
-<h3 class="anchored" data-anchor-id="evaluación-inicial">Evaluación Inicial</h3>
-<p>La exploración inicial del dataset reveló la necesidad de aplicar los siguientes procedimientos de limpieza:</p>
+<section id="procesamiento-de-datos" class="level1">
+<h1>Procesamiento de Datos</h1>
+<section id="limpieza-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="limpieza-de-datos">Limpieza de Datos</h2>
 <ol type="1">
-<li><strong>Manejo de valores faltantes</strong>:
+<li><strong>Manejo de valores faltantes:</strong>
 <ul>
-<li>Eliminación de registros con año de lanzamiento faltante.</li>
-<li>Imputación de ventas regionales missing con valor cero, asumiendo que la ausencia indica ventas insignificantes.</li>
+<li>Eliminación de registros con año de lanzamiento faltante<br>
+</li>
+<li>Imputación de ventas regionales faltantes con valor cero</li>
 </ul></li>
-<li><strong>Consistencia de datos</strong>:
+<li><strong>Clasificación de plataformas:</strong>
 <ul>
-<li>Verificación de integridad entre ventas regionales y globales</li>
-<li>Corrección de outliers evidentes en datos de ventas</li>
+<li>Asignación sistemática de cada plataforma a su país de origen<br>
+</li>
+<li>Validación con fuentes históricas de la industria</li>
 </ul></li>
-<li><strong>Clasificación de plataformas</strong>:
+<li><strong>Agregación de datos:</strong>
 <ul>
-<li>Asignación sistemática de cada plataforma a su país de origen (América vs Japón)</li>
-<li>Validación cruzada con fuentes históricas de la industria</li>
-</ul></li>
-<li><strong>Agregación temporal</strong>:
-<ul>
-<li>Agrupación de datos por períodos anuales para facilitar el análisis de tendencias</li>
-<li>Cálculo de métricas agregadas por plataforma, género y región</li>
+<li>Cálculo de métricas agregadas por plataforma, género y región<br>
+</li>
+<li>Análisis comparativo de patrones de ventas regionales</li>
 </ul></li>
 </ol>
+<hr>
 </section>
+<section id="enfoque-analítico" class="level2">
+<h2 class="anchored" data-anchor-id="enfoque-analítico">Enfoque Analítico</h2>
+<p>El análisis se centrará en:</p>
+<ul>
+<li>Comparar <strong>volúmenes de ventas entre regiones (NA vs JP)</strong><br>
+</li>
+<li>Analizar <strong>diferencias en preferencias de género por región</strong><br>
+</li>
+<li>Evaluar el <strong>desempeño comercial cruzado</strong> (juegos en consolas americanas en Japón vs juegos en consolas japonesas en América)<br>
+</li>
+<li>Identificar <strong>tendencias temporales en la penetración comercial entre mercados</strong></li>
+</ul>
 </section>
 </section>
 
