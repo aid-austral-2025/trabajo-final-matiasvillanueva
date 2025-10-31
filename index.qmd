@@ -377,7 +377,7 @@ japanese_market_penetration <- video_game_sales %>%
   geom_col(alpha = 0.8) +
   scale_fill_manual(
     values = c(
-      "Japón" = "#d62728",
+      "Asia" = "#d62728",
       "Resto del Mundo" = "#4ecdc4"
     )
   ) +
