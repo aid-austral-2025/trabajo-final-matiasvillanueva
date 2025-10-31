@@ -123,20 +123,20 @@ video_game_sales <- video_game_sales %>%
 #| warning: false
 
 american_sales_time <- video_game_sales %>%
-filter(ConsoleOrigin == "North America") %>%
-mutate(Year = as.numeric(Year)) %>%
-ggplot(aes(x = Year, weight = Global_Sales)) +
-geom_histogram(
-bins = 20,                        
-fill = "#1f77b4",               
-alpha = 0.6,
-color = "white"
-) +
-labs(
-title = "Distribución de Ventas en el Tiempo - Consolas Americanas",
-x = "Año", y = "Ventas ponderadas (millones)"
-) +
-scale_x_continuous(breaks = seq(1986, 2016, by = 5)) 
+  filter(ConsoleOrigin == "North America") %>%
+  mutate(Year = as.numeric(Year)) %>%
+  ggplot(aes(x = Year, weight = Global_Sales)) +
+  geom_histogram(
+    bins = 20,
+    fill = "#1f77b4",
+    alpha = 0.6,
+    color = "white"
+  ) +
+  labs(
+    title = "Distribución de Ventas en el Tiempo - Consolas Americanas",
+    x = "Año", y = "Ventas ponderadas (millones)"
+  ) +
+  scale_x_continuous(breaks = seq(1986, 2016, by = 5))
 
 american_sales_time
 ```
@@ -152,13 +152,15 @@ Analizando el gráfico de la evolución temporal de ventas para consolas Estadou
 #| message: false
 #| warning: false
 
-american_genres_count <- video_game_sales %>% 
+american_genres_count <- video_game_sales %>%
   filter(ConsoleOrigin == "North America") %>%
   count(Genre) %>%
   ggplot(aes(x = n, y = reorder(Genre, n), fill = Genre)) +
   geom_col(show.legend = FALSE) +
-  labs(title = "Cantidad de Juegos por Género - Consolas Americanas",
-       x = "Cantidad de Juegos", y = "Género") +
+  labs(
+    title = "Cantidad de Juegos por Género - Consolas Americanas",
+    x = "Cantidad de Juegos", y = "Género"
+  ) +
   scale_fill_discrete() +
   scale_x_continuous(labels = scales::comma)
 
@@ -177,7 +179,7 @@ Analizando la distribución de géneros desarrollados para consolas Estadouniden
 #| warning: false
 #| results: "hide"
 
-american_genres_sales_time <- video_game_sales %>% 
+american_genres_sales_time <- video_game_sales %>%
   filter(ConsoleOrigin == "North America") %>%
   mutate(Year = as.numeric(as.character(Year))) %>%
   group_by(Year, Genre) %>%
@@ -217,7 +219,7 @@ Analizando la evolución de ventas de los géneros más exitosos en consolas Est
 #| message: false
 #| warning: false
 
-american_market_penetration <- video_game_sales %>% 
+american_market_penetration <- video_game_sales %>%
   filter(ConsoleOrigin == "North America") %>%
   summarise(
     NA_Sales = sum(NA_Sales, na.rm = TRUE),
@@ -232,10 +234,12 @@ american_market_penetration <- video_game_sales %>%
     )
   ) %>%
   ggplot(aes(x = Market, y = Sales, fill = Market)) +
-  geom_col(alpha = 0.8) + 
+  geom_col(alpha = 0.8) +
   scale_fill_manual(
-    values = c("América" = "#1f77b4", 
-               "Resto del Mundo"   = "#4ecdc4") 
+    values = c(
+      "América" = "#1f77b4",
+      "Resto del Mundo" = "#4ecdc4"
+    )
   ) +
   labs(
     title = "Penetración de Mercado - Consolas Estadounidenses",
@@ -260,20 +264,20 @@ Analizando la penetración de mercado de las consolas Estadounidenses, se observ
 #| warning: false
 
 japanese_sales_time <- video_game_sales %>%
-filter(ConsoleOrigin == "Asia") %>%
-mutate(Year = as.numeric(Year)) %>%
-ggplot(aes(x = Year, weight = Global_Sales)) +
-geom_histogram(
-bins = 20,
-fill = "#d62728", 
-alpha = 0.6,
-color = "white"
-) +
-labs(
-title = "Distribución de Ventas en el Tiempo - Consolas Japonesas",
-x = "Año", y = "Ventas ponderadas (millones)"
-) +
-scale_x_continuous(breaks = seq(1986, 2016, by = 5))
+  filter(ConsoleOrigin == "Asia") %>%
+  mutate(Year = as.numeric(Year)) %>%
+  ggplot(aes(x = Year, weight = Global_Sales)) +
+  geom_histogram(
+    bins = 20,
+    fill = "#d62728",
+    alpha = 0.6,
+    color = "white"
+  ) +
+  labs(
+    title = "Distribución de Ventas en el Tiempo - Consolas Japonesas",
+    x = "Año", y = "Ventas ponderadas (millones)"
+  ) +
+  scale_x_continuous(breaks = seq(1986, 2016, by = 5))
 
 japanese_sales_time
 ```
@@ -290,14 +294,16 @@ Analizando el gráfico de la evolución temporal de ventas para consolas Japones
 #| warning: false
 
 japanese_genres_count <- video_game_sales %>%
-filter(ConsoleOrigin == "Asia") %>%
-count(Genre) %>%
-ggplot(aes(x = n, y = reorder(Genre, n), fill = Genre)) +
-geom_col(show.legend = FALSE) +
-labs(title = "Cantidad de Juegos por Género - Consolas Japonesas",
-x = "Cantidad de Juegos", y = "Género") +
-scale_fill_discrete() +
-scale_x_continuous(labels = scales::comma)
+  filter(ConsoleOrigin == "Asia") %>%
+  count(Genre) %>%
+  ggplot(aes(x = n, y = reorder(Genre, n), fill = Genre)) +
+  geom_col(show.legend = FALSE) +
+  labs(
+    title = "Cantidad de Juegos por Género - Consolas Japonesas",
+    x = "Cantidad de Juegos", y = "Género"
+  ) +
+  scale_fill_discrete() +
+  scale_x_continuous(labels = scales::comma)
 
 japanese_genres_count
 ```
@@ -314,30 +320,30 @@ Analizando la distribución de géneros desarrollados para consolas Japonesas, s
 #| warning: false
 
 japanese_genres_sales_time_df <- video_game_sales %>%
-filter(ConsoleOrigin == "Asia") %>%
-mutate(Year = as.numeric(as.character(Year))) %>%
-group_by(Year, Genre) %>%
-summarise(Total_Sales = sum(Global_Sales, na.rm = TRUE), .groups = "drop")
+  filter(ConsoleOrigin == "Asia") %>%
+  mutate(Year = as.numeric(as.character(Year))) %>%
+  group_by(Year, Genre) %>%
+  summarise(Total_Sales = sum(Global_Sales, na.rm = TRUE), .groups = "drop")
 
 top_genres_jp <- japanese_genres_sales_time_df %>%
-group_by(Genre) %>%
-summarise(Total = sum(Total_Sales)) %>%
-arrange(desc(Total)) %>%
-slice_head(n = 5) %>%
-pull(Genre)
+  group_by(Genre) %>%
+  summarise(Total = sum(Total_Sales)) %>%
+  arrange(desc(Total)) %>%
+  slice_head(n = 5) %>%
+  pull(Genre)
 
 japanese_genres_sales_time <- japanese_genres_sales_time_df %>%
-filter(Genre %in% top_genres_jp) %>%
-ggplot(aes(x = Year, y = Total_Sales, fill = Genre)) +
-geom_area(alpha = 0.8, size = 0.1, colour = "white") +
-scale_fill_viridis_d(option = "C") +
-scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
-scale_y_continuous(labels = scales::comma) +
-labs(
-title = "Evolución de Ventas - Top 5 Géneros (Consolas Japonesas)",
-x = "Año", y = "Ventas Globales (millones)",
-fill = "Género"
-)
+  filter(Genre %in% top_genres_jp) %>%
+  ggplot(aes(x = Year, y = Total_Sales, fill = Genre)) +
+  geom_area(alpha = 0.8, size = 0.1, colour = "white") +
+  scale_fill_viridis_d(option = "C") +
+  scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = "Evolución de Ventas - Top 5 Géneros (Consolas Japonesas)",
+    x = "Año", y = "Ventas Globales (millones)",
+    fill = "Género"
+  )
 
 japanese_genres_sales_time
 ```
@@ -354,30 +360,32 @@ Analizando la evolución de ventas de los géneros más exitosos en consolas jap
 #| warning: false
 
 japanese_market_penetration <- video_game_sales %>%
-filter(ConsoleOrigin == "Asia") %>%
-summarise(
-JP_Sales = sum(JP_Sales, na.rm = TRUE),
-Other_Sales = sum(Global_Sales, na.rm = TRUE) - sum(JP_Sales, na.rm = TRUE)
-) %>%
-tidyr::pivot_longer(cols = everything(), names_to = "Market", values_to = "Sales") %>%
-mutate(
-Market = factor(
-Market,
-levels = c("JP_Sales", "Other_Sales"),
-labels = c("Asia", "Resto del Mundo")
-)
-) %>%
-ggplot(aes(x = Market, y = Sales, fill = Market)) +
-geom_col(alpha = 0.8) +
-scale_fill_manual(
-values = c("Japón" = "#d62728",
-"Resto del Mundo" = "#4ecdc4") 
-) +
-labs(
-title = "Penetración de Mercado - Consolas Japonesas",
-x = "Mercado", y = "Ventas (millones)"
-) +
-theme(legend.position = "none")
+  filter(ConsoleOrigin == "Asia") %>%
+  summarise(
+    JP_Sales = sum(JP_Sales, na.rm = TRUE),
+    Other_Sales = sum(Global_Sales, na.rm = TRUE) - sum(JP_Sales, na.rm = TRUE)
+  ) %>%
+  tidyr::pivot_longer(cols = everything(), names_to = "Market", values_to = "Sales") %>%
+  mutate(
+    Market = factor(
+      Market,
+      levels = c("JP_Sales", "Other_Sales"),
+      labels = c("Asia", "Resto del Mundo")
+    )
+  ) %>%
+  ggplot(aes(x = Market, y = Sales, fill = Market)) +
+  geom_col(alpha = 0.8) +
+  scale_fill_manual(
+    values = c(
+      "Japón" = "#d62728",
+      "Resto del Mundo" = "#4ecdc4"
+    )
+  ) +
+  labs(
+    title = "Penetración de Mercado - Consolas Japonesas",
+    x = "Mercado", y = "Ventas (millones)"
+  ) +
+  theme(legend.position = "none")
 
 japanese_market_penetration
 ```
@@ -396,19 +404,19 @@ Analizando la penetración de mercado de las consolas japonesas, se evidencia un
 #| warning: false
 
 american_in_japan <- video_game_sales %>%
-filter(ConsoleOrigin == "North America") %>%
-mutate(Year = as.numeric(Year)) %>%
-group_by(Year) %>%
-summarise(Sales_Japan = sum(JP_Sales, na.rm = TRUE), .groups = "drop") %>%
-ggplot(aes(x = Year, y = Sales_Japan)) +
-geom_line(color = "#1f77b4", linewidth = 1.2) +
-geom_point(color = "#1f77b4", size = 2) +
-scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
-scale_y_continuous(labels = scales::comma) +
-labs(
-title = "Ventas de Juegos de Consolas Estadounidenses en Asia",
-x = "Año", y = "Ventas (millones)"
-)
+  filter(ConsoleOrigin == "North America") %>%
+  mutate(Year = as.numeric(Year)) %>%
+  group_by(Year) %>%
+  summarise(Sales_Japan = sum(JP_Sales, na.rm = TRUE), .groups = "drop") %>%
+  ggplot(aes(x = Year, y = Sales_Japan)) +
+  geom_line(color = "#1f77b4", linewidth = 1.2) +
+  geom_point(color = "#1f77b4", size = 2) +
+  scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = "Ventas de Juegos de Consolas Estadounidenses en Asia",
+    x = "Año", y = "Ventas (millones)"
+  )
 
 american_in_japan
 ```
@@ -424,19 +432,19 @@ Analizando las ventas de juegos para consolas Estadounidenses en el mercado Asia
 #| warning: false
 
 japanese_in_usa <- video_game_sales %>%
-filter(ConsoleOrigin == "Asia") %>%
-mutate(Year = as.numeric(Year)) %>%
-group_by(Year) %>%
-summarise(Sales_USA = sum(NA_Sales, na.rm = TRUE), .groups = "drop") %>%
-ggplot(aes(x = Year, y = Sales_USA)) +
-geom_line(color = "#d62728", linewidth = 1.2) +
-geom_point(color = "#d62728", size = 2) +
-scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
-scale_y_continuous(labels = scales::comma) +
-labs(
-title = "Ventas de Juegos de Consolas Japonesas en America",
-x = "Año", y = "Ventas (millones)"
-)
+  filter(ConsoleOrigin == "Asia") %>%
+  mutate(Year = as.numeric(Year)) %>%
+  group_by(Year) %>%
+  summarise(Sales_USA = sum(NA_Sales, na.rm = TRUE), .groups = "drop") %>%
+  ggplot(aes(x = Year, y = Sales_USA)) +
+  geom_line(color = "#d62728", linewidth = 1.2) +
+  geom_point(color = "#d62728", size = 2) +
+  scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = "Ventas de Juegos de Consolas Japonesas en America",
+    x = "Año", y = "Ventas (millones)"
+  )
 
 japanese_in_usa
 ```
@@ -453,39 +461,46 @@ Analizando las ventas de juegos para consolas Japonesas en el mercado Americano,
 #| warning: false
 
 cross_market <- video_game_sales %>%
-mutate(Year = as.numeric(Year)) %>%
-summarise(
-JP_in_USA = sum(NA_Sales[ConsoleOrigin == "Asia"], na.rm = TRUE),
-US_in_JP = sum(JP_Sales[ConsoleOrigin == "North America"], na.rm = TRUE),
-.groups = "drop"
-)
+  mutate(Year = as.numeric(Year)) %>%
+  summarise(
+    JP_in_USA = sum(NA_Sales[ConsoleOrigin == "Asia"], na.rm = TRUE),
+    US_in_JP = sum(JP_Sales[ConsoleOrigin == "North America"], na.rm = TRUE),
+    .groups = "drop"
+  )
 
 cross_market_by_year <- video_game_sales %>%
-mutate(Year = as.numeric(Year)) %>%
-group_by(Year) %>%
-summarise(
-JP_in_USA = sum(ifelse(ConsoleOrigin == "Asia", NA_Sales, 0), na.rm = TRUE),
-US_in_JP = sum(ifelse(ConsoleOrigin == "North America", JP_Sales, 0), na.rm = TRUE),
-.groups = "drop"
-) %>%
-tidyr::pivot_longer(cols = c(JP_in_USA, US_in_JP),
-names_to = "Flow", values_to = "Sales") %>%
-mutate(Flow = recode(Flow,
-"JP_in_USA" = "Japonesas en America",
-"US_in_JP" = "Americanas en Asia"))
+  mutate(Year = as.numeric(Year)) %>%
+  group_by(Year) %>%
+  summarise(
+    JP_in_USA = sum(ifelse(ConsoleOrigin == "Asia", NA_Sales, 0), na.rm = TRUE),
+    US_in_JP = sum(ifelse(ConsoleOrigin == "North America", JP_Sales, 0), na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  tidyr::pivot_longer(
+    cols = c(JP_in_USA, US_in_JP),
+    names_to = "Flow", values_to = "Sales"
+  ) %>%
+  mutate(Flow = recode(Flow,
+    "JP_in_USA" = "Japonesas en America",
+    "US_in_JP" = "Americanas en Asia"
+  ))
 
-cross_market_plot <- ggplot(cross_market_by_year,
-aes(x = Year, y = Sales, color = Flow)) +
-geom_line(linewidth = 1.2) +
-geom_point(size = 2) +
-scale_color_manual(values = c("Japonesas en America" = "#d62728",
-"Americanas en Asia" = "#1f77b4")) +
-scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
-scale_y_continuous(labels = scales::comma) +
-labs(
-title = "Ventas Cruzadas entre Mercados (1986–2016)",
-x = "Año", y = "Ventas (millones)", color = "Origen → Destino"
-)
+cross_market_plot <- ggplot(
+  cross_market_by_year,
+  aes(x = Year, y = Sales, color = Flow)
+) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  scale_color_manual(values = c(
+    "Japonesas en America" = "#d62728",
+    "Americanas en Asia" = "#1f77b4"
+  )) +
+  scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = "Ventas Cruzadas entre Mercados (1986–2016)",
+    x = "Año", y = "Ventas (millones)", color = "Origen → Destino"
+  )
 
 cross_market_plot
 ```
@@ -502,27 +517,29 @@ Analizando de manera comparativa las ventas cruzadas entre ambos mercados, se co
 #| warning: false
 
 eu_sales_by_origin <- video_game_sales %>%
-filter(ConsoleOrigin %in% c("North America", "Asia")) %>%
-mutate(Year = as.numeric(Year)) %>%
-group_by(Year, ConsoleOrigin) %>%
-summarise(EU_Sales = sum(EU_Sales, na.rm = TRUE), .groups = "drop")
+  filter(ConsoleOrigin %in% c("North America", "Asia")) %>%
+  mutate(Year = as.numeric(Year)) %>%
+  group_by(Year, ConsoleOrigin) %>%
+  summarise(EU_Sales = sum(EU_Sales, na.rm = TRUE), .groups = "drop")
 
 eu_sales_by_origin_plot <- eu_sales_by_origin %>%
-ggplot(aes(x = Year, y = EU_Sales, color = ConsoleOrigin)) +
-geom_line(linewidth = 1.2) +
-geom_point(size = 2) +
-scale_color_manual(
-values = c("North America" = "#1f77b4", # azul América
-"Asia" = "#d62728") # rojo Japón
-) +
-scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
-scale_y_continuous(labels = scales::comma) +
-labs(
-title = "Ventas en Europa por Origen de Consola",
-x = "Año", y = "Ventas en Europa (millones)",
-color = "Origen de Consola"
-) +
-theme_minimal()
+  ggplot(aes(x = Year, y = EU_Sales, color = ConsoleOrigin)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  scale_color_manual(
+    values = c(
+      "North America" = "#1f77b4", # azul América
+      "Asia" = "#d62728"
+    ) # rojo Japón
+  ) +
+  scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = "Ventas en Europa por Origen de Consola",
+    x = "Año", y = "Ventas en Europa (millones)",
+    color = "Origen de Consola"
+  ) +
+  theme_minimal()
 
 eu_sales_by_origin_plot
 ```
