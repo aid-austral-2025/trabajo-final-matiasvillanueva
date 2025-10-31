@@ -7,18 +7,17 @@ URL del sitio desplegado: https://aid-austral-2025.github.io/trabajo-final-matia
 ## Cómo usar Make
 
 ### Comandos disponibles
-
-make          - Genera el reporte HTML
-
-make clean    - Elimina los archivos generados  
-
-make help     - Muestra esta ayuda
+```bash
+make         - Genera el reporte HTML  
+make clean   - Elimina los archivos generados  
+make help    - Muestra esta ayuda  
+```
 
 ### Instrucciones
 
 1. Generar el reporte:
    make
-   Esto compila scripts/index.qmd y genera index.html en la carpeta principal.
+   Esto compila index.qmd y genera index.html en la carpeta principal.
 
 2. Ver el resultado:
    Abre index.html en tu navegador.

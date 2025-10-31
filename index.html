@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Matias Villanueva">
 
-<title>index</title>
+<title>Analisis de Penetración Cruzada de Videojuegos entre América y Japon (1986-2016)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,29 +38,101 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">1</span> Introducción</a></li>
+  <li><a href="#materiales-y-métodos" id="toc-materiales-y-métodos" class="nav-link" data-scroll-target="#materiales-y-métodos"><span class="header-section-number">2</span> Materiales y métodos</a>
+  <ul>
+  <li><a href="#fuente-de-datos" id="toc-fuente-de-datos" class="nav-link" data-scroll-target="#fuente-de-datos"><span class="header-section-number">2.1</span> Fuente de datos</a></li>
+  <li><a href="#variables-utilizadas" id="toc-variables-utilizadas" class="nav-link" data-scroll-target="#variables-utilizadas"><span class="header-section-number">2.2</span> Variables utilizadas</a></li>
+  <li><a href="#criterios-de-selección" id="toc-criterios-de-selección" class="nav-link" data-scroll-target="#criterios-de-selección"><span class="header-section-number">2.3</span> Criterios de selección</a></li>
+  </ul></li>
+  <li><a href="#procesamiento-de-datos" id="toc-procesamiento-de-datos" class="nav-link" data-scroll-target="#procesamiento-de-datos"><span class="header-section-number">3</span> Procesamiento de datos</a>
+  <ul>
+  <li><a href="#limpieza-de-datos" id="toc-limpieza-de-datos" class="nav-link" data-scroll-target="#limpieza-de-datos"><span class="header-section-number">3.1</span> Limpieza de datos</a></li>
+  <li><a href="#enfoque-analítico" id="toc-enfoque-analítico" class="nav-link" data-scroll-target="#enfoque-analítico"><span class="header-section-number">3.2</span> Enfoque analítico</a></li>
+  </ul></li>
+  <li><a href="#análisis-de-datos" id="toc-análisis-de-datos" class="nav-link" data-scroll-target="#análisis-de-datos"><span class="header-section-number">4</span> Análisis de datos</a>
+  <ul>
+  <li><a href="#desempeño-de-consolas-estadounidenses" id="toc-desempeño-de-consolas-estadounidenses" class="nav-link" data-scroll-target="#desempeño-de-consolas-estadounidenses"><span class="header-section-number">4.1</span> Desempeño de consolas Estadounidenses</a>
+  <ul class="collapse">
+  <li><a href="#evolución-temporal-de-ventas" id="toc-evolución-temporal-de-ventas" class="nav-link" data-scroll-target="#evolución-temporal-de-ventas"><span class="header-section-number">4.1.1</span> Evolución temporal de ventas</a></li>
+  <li><a href="#distribución-de-géneros-desarrollados" id="toc-distribución-de-géneros-desarrollados" class="nav-link" data-scroll-target="#distribución-de-géneros-desarrollados"><span class="header-section-number">4.1.2</span> Distribución de géneros desarrollados</a></li>
+  <li><a href="#generos-más-vendidos-en-consolas-estadounidenses" id="toc-generos-más-vendidos-en-consolas-estadounidenses" class="nav-link" data-scroll-target="#generos-más-vendidos-en-consolas-estadounidenses"><span class="header-section-number">4.1.3</span> Generos más vendidos en consolas Estadounidenses</a></li>
+  <li><a href="#penetración-de-mercado-américa-vs.-resto-del-mundo" id="toc-penetración-de-mercado-américa-vs.-resto-del-mundo" class="nav-link" data-scroll-target="#penetración-de-mercado-américa-vs.-resto-del-mundo"><span class="header-section-number">4.1.4</span> Penetración de mercado: América vs.&nbsp;Resto del Mundo</a></li>
+  </ul></li>
+  <li><a href="#desempeño-de-consolas-japonesas" id="toc-desempeño-de-consolas-japonesas" class="nav-link" data-scroll-target="#desempeño-de-consolas-japonesas"><span class="header-section-number">4.2</span> Desempeño de Consolas Japonesas</a>
+  <ul class="collapse">
+  <li><a href="#evolución-temporal-de-ventas-1" id="toc-evolución-temporal-de-ventas-1" class="nav-link" data-scroll-target="#evolución-temporal-de-ventas-1"><span class="header-section-number">4.2.1</span> Evolución temporal de ventas</a></li>
+  <li><a href="#distribución-de-géneros-desarrollados-1" id="toc-distribución-de-géneros-desarrollados-1" class="nav-link" data-scroll-target="#distribución-de-géneros-desarrollados-1"><span class="header-section-number">4.2.2</span> Distribución de géneros desarrollados</a></li>
+  <li><a href="#generos-más-vendidos-en-consolas-japonesas" id="toc-generos-más-vendidos-en-consolas-japonesas" class="nav-link" data-scroll-target="#generos-más-vendidos-en-consolas-japonesas"><span class="header-section-number">4.2.3</span> Generos más vendidos en consolas Japonesas</a></li>
+  <li><a href="#penetración-de-percado-asia-vs.-resto-del-mundo" id="toc-penetración-de-percado-asia-vs.-resto-del-mundo" class="nav-link" data-scroll-target="#penetración-de-percado-asia-vs.-resto-del-mundo"><span class="header-section-number">4.2.4</span> Penetración de percado: Asia vs.&nbsp;Resto del Mundo</a></li>
+  </ul></li>
+  <li><a href="#estados-unidos-vs-japón-análisis-de-ventas-cruzadas" id="toc-estados-unidos-vs-japón-análisis-de-ventas-cruzadas" class="nav-link" data-scroll-target="#estados-unidos-vs-japón-análisis-de-ventas-cruzadas"><span class="header-section-number">4.3</span> Estados Unidos vs Japón: Análisis de ventas cruzadas</a>
+  <ul class="collapse">
+  <li><a href="#ventas-de-juegos-de-consolas-estadounidenses-en-asia" id="toc-ventas-de-juegos-de-consolas-estadounidenses-en-asia" class="nav-link" data-scroll-target="#ventas-de-juegos-de-consolas-estadounidenses-en-asia"><span class="header-section-number">4.3.1</span> Ventas De Juegos de Consolas Estadounidenses en Asia</a></li>
+  <li><a href="#ventas-de-juegos-de-consolas-japonesas-en-america" id="toc-ventas-de-juegos-de-consolas-japonesas-en-america" class="nav-link" data-scroll-target="#ventas-de-juegos-de-consolas-japonesas-en-america"><span class="header-section-number">4.3.2</span> Ventas de juegos de consolas Japonesas en America</a></li>
+  <li><a href="#análisis-de-penetración-comercial-cruzada-consolas-japonesas-en-america-y-consolas-estadounidenses-en-asia" id="toc-análisis-de-penetración-comercial-cruzada-consolas-japonesas-en-america-y-consolas-estadounidenses-en-asia" class="nav-link" data-scroll-target="#análisis-de-penetración-comercial-cruzada-consolas-japonesas-en-america-y-consolas-estadounidenses-en-asia"><span class="header-section-number">4.3.3</span> Análisis de penetración comercial cruzada: consolas Japonesas en America y consolas Estadounidenses en Asia</a></li>
+  <li><a href="#ventas-de-juegos-de-consolas-estadounidenses-y-japonesas-en-europa" id="toc-ventas-de-juegos-de-consolas-estadounidenses-y-japonesas-en-europa" class="nav-link" data-scroll-target="#ventas-de-juegos-de-consolas-estadounidenses-y-japonesas-en-europa"><span class="header-section-number">4.3.4</span> Ventas de juegos de consolas Estadounidenses y Japonesas en Europa</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5</span> Conclusion</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content column-page-left" id="quarto-document-content">
 
-<main class="content" id="quarto-document-content">
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analisis de Penetración Cruzada de Videojuegos entre América y Japon (1986-2016)</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="introducción" class="level1">
-<h1>Introducción</h1>
-<p>El mercado de videojuegos ha experimentado un crecimiento exponencial desde sus inicios, convirtiéndose en una de las industrias de entretenimiento más lucrativas a nivel global. Dos de los actores más significativos han sido históricamente <strong>América (principalmente Estados Unidos)</strong> y <strong>Japón</strong>, naciones que han desarrollado consolas icónicas y cultivado audiencias masivas.</p>
-<p>Este estudio busca analizar la dinámica comercial entre estos dos mercados clave durante el período <strong>1986-2016</strong>, específicamente investigando cómo las ventas de videojuegos variaron según el origen de las consolas y las regiones de comercialización. El análisis se centra en los <strong>patrones de ventas cruzadas entre estas regiones</strong>.</p>
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Matias Villanueva </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">31 de octubre de 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introducción" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introducción</h1>
+<p>El mercado de videojuegos ha experimentado un crecimiento exponencial desde sus inicios, convirtiéndose en una de las industrias de entretenimiento más lucrativas a nivel global. Dos de los actores más significativos han sido históricamente <strong>Estados Unidos</strong> y <strong>Japón</strong>, naciones que han desarrollado consolas icónicas y cultivado audiencias masivas.</p>
+<p>Este estudio busca analizar la dinámica comercial entre estos dos mercados clave durante el período <strong>1986-2016</strong>, específicamente investigando cómo las ventas de videojuegos variaron según el origen de las consolas y las regiones de comercialización. El análisis se centra en los <strong>impacto de ventas cruzadas entre estas regiones</strong>.</p>
 <hr>
 </section>
-<section id="materiales-y-métodos" class="level1">
-<h1>Materiales y Métodos</h1>
-<section id="fuente-de-datos" class="level2">
-<h2 class="anchored" data-anchor-id="fuente-de-datos">Fuente de Datos</h2>
+<section id="materiales-y-métodos" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Materiales y métodos</h1>
+<section id="fuente-de-datos" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="fuente-de-datos"><span class="header-section-number">2.1</span> Fuente de datos</h2>
 <p>Para este análisis se utilizó el dataset <em>“Video Game Sales”</em>, que contiene información histórica sobre ventas de videojuegos desde <strong>1980 hasta 2016</strong>, con cobertura comprehensiva del período de interés.</p>
 </section>
-<section id="variables-utilizadas" class="level2">
-<h2 class="anchored" data-anchor-id="variables-utilizadas">Variables Utilizadas</h2>
+<section id="variables-utilizadas" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="variables-utilizadas"><span class="header-section-number">2.2</span> Variables utilizadas</h2>
 <p>Del dataset original se emplearon las siguientes variables:</p>
 <ul>
 <li><strong>Nombre del juego (Name):</strong> Identificador del título<br>
@@ -77,8 +150,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Ventas globales (Global_Sales):</strong> Total mundial</li>
 </ul>
 </section>
-<section id="criterios-de-selección" class="level2">
-<h2 class="anchored" data-anchor-id="criterios-de-selección">Criterios de Selección</h2>
+<section id="criterios-de-selección" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="criterios-de-selección"><span class="header-section-number">2.3</span> Criterios de selección</h2>
 <p>Se aplicaron los siguientes filtros:</p>
 <ul>
 <li><strong>Período temporal:</strong> 1986-2016<br>
@@ -95,16 +168,15 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 </section>
 </section>
-<section id="procesamiento-de-datos" class="level1">
-<h1>Procesamiento de Datos</h1>
-<section id="limpieza-de-datos" class="level2">
-<h2 class="anchored" data-anchor-id="limpieza-de-datos">Limpieza de Datos</h2>
+<section id="procesamiento-de-datos" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Procesamiento de datos</h1>
+<section id="limpieza-de-datos" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="limpieza-de-datos"><span class="header-section-number">3.1</span> Limpieza de datos</h2>
 <ol type="1">
-<li><strong>Manejo de valores faltantes:</strong>
+<li><strong>Manejo de valores fuera de rango:</strong>
 <ul>
-<li>Eliminación de registros con año de lanzamiento faltante<br>
+<li>Eliminación de registros con año fuera de rango<br>
 </li>
-<li>Imputación de ventas regionales faltantes con valor cero</li>
 </ul></li>
 <li><strong>Clasificación de plataformas:</strong>
 <ul>
@@ -112,17 +184,16 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li>Validación con fuentes históricas de la industria</li>
 </ul></li>
-<li><strong>Agregación de datos:</strong>
+<li><strong>Exclusion de datos fuera del estudio:</strong>
 <ul>
-<li>Cálculo de métricas agregadas por plataforma, género y región<br>
+<li>Filtrado de plataformas no relevantes (PC, móviles)<br>
 </li>
-<li>Análisis comparativo de patrones de ventas regionales</li>
 </ul></li>
 </ol>
 <hr>
 </section>
-<section id="enfoque-analítico" class="level2">
-<h2 class="anchored" data-anchor-id="enfoque-analítico">Enfoque Analítico</h2>
+<section id="enfoque-analítico" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="enfoque-analítico"><span class="header-section-number">3.2</span> Enfoque analítico</h2>
 <p>El análisis se centrará en:</p>
 <ul>
 <li>Comparar <strong>volúmenes de ventas entre regiones (NA vs JP)</strong><br>
@@ -133,7 +204,195 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li>Identificar <strong>tendencias temporales en la penetración comercial entre mercados</strong></li>
 </ul>
+<hr>
 </section>
+</section>
+<section id="análisis-de-datos" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Análisis de datos</h1>
+<section id="desempeño-de-consolas-estadounidenses" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="desempeño-de-consolas-estadounidenses"><span class="header-section-number">4.1</span> Desempeño de consolas Estadounidenses</h2>
+<section id="evolución-temporal-de-ventas" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="evolución-temporal-de-ventas"><span class="header-section-number">4.1.1</span> Evolución temporal de ventas</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ventas-americanas-tiempo-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Evolución anual de ventas de videojuegos en consolas Estadounidenses (1986-2016)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando el gráfico de la evolución temporal de ventas para consolas Estadounidenses, se observa una trayectoria comercial caracterizada por un inicio tardío, con ventas insignificantes durante la década de 1990, seguido de un crecimiento explosivo a partir de 2001 —coincidiendo con el lanzamiento de la primera Xbox— que culmina en un pico máximo alrededor de 2006, para luego entrar en una fase de declive pronunciado y continuo hasta el final del período de estudio en 2016, reflejando así un ciclo de vida de mercado concentrado principalmente en la primera década del siglo XXI.</p>
+</section>
+<section id="distribución-de-géneros-desarrollados" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="distribución-de-géneros-desarrollados"><span class="header-section-number">4.1.2</span> Distribución de géneros desarrollados</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/generos-estadounidenses-cantidad-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cantidad de juegos por género desarrollados para consolas Estadounidenses</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando la distribución de géneros desarrollados para consolas Estadounidenses, se observa una marcada concentración en tres categorías principales: Action, Sports y Shooter, que dominan significativamente el catálogo disponible, seguidos por géneros secundarios como Racing y Misc, mientras que categorías como Strategy, Puzzle y Simulation presentan una presencia marginal,</p>
+</section>
+<section id="generos-más-vendidos-en-consolas-estadounidenses" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="generos-más-vendidos-en-consolas-estadounidenses"><span class="header-section-number">4.1.3</span> Generos más vendidos en consolas Estadounidenses</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ventas-generos-americanos-tiempo-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Evolución de ventas por género en consolas Estadounidenses (1986-2016)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando la evolución de ventas de los géneros más exitosos en consolas Estadounidenses, se observa que el género Shooter experimenta un crecimiento explosivo a partir de 2001, convirtiéndose en la categoría dominante y alcanzando su pico máximo alrededor de 2010, mientras que Action mantiene un desempeño constante como segunda categoría en importancia, y géneros como Sports, Racing y Misc presentan volúmenes de ventas significativamente menores a lo largo de todo el período.</p>
+</section>
+<section id="penetración-de-mercado-américa-vs.-resto-del-mundo" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="penetración-de-mercado-américa-vs.-resto-del-mundo"><span class="header-section-number">4.1.4</span> Penetración de mercado: América vs.&nbsp;Resto del Mundo</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/mercado-americanas-domestico-internacional-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Comparación de ventas domésticas vs internacionales de consolas Estadounidenses</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando la penetración de mercado de las consolas Estadounidenses, se observa una marcada predominancia de las ventas en América, que superan significativamente a las registradas en el Resto del Mundo, lo que indica que el éxito comercial de estas plataformas se concentró principalmente en su mercado doméstico durante el período de estudio.</p>
+</section>
+</section>
+<section id="desempeño-de-consolas-japonesas" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="desempeño-de-consolas-japonesas"><span class="header-section-number">4.2</span> Desempeño de Consolas Japonesas</h2>
+<section id="evolución-temporal-de-ventas-1" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="evolución-temporal-de-ventas-1"><span class="header-section-number">4.2.1</span> Evolución temporal de ventas</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ventas-japonesas-tiempo-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Evolución anual de ventas de videojuegos en consolas Japonesas (1986-2016)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando el gráfico de la evolución temporal de ventas para consolas Japonesas, se observa una trayectoria comercial con un crecimiento constante desde 1986 que alcanza su máximo histórico alrededor de 2005-2006, seguido de una fase de declive progresivo hasta el final del período estudiado en 2016, mostrando un ciclo de vida extenso que abarca tres décadas completas de presencia en el mercado.</p>
+</section>
+<section id="distribución-de-géneros-desarrollados-1" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="distribución-de-géneros-desarrollados-1"><span class="header-section-number">4.2.2</span> Distribución de géneros desarrollados</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/generos-japoneses-cantidad-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cantidad de juegos por género desarrollados para consolas Japonesas</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando la distribución de géneros desarrollados para consolas Japonesas, se identifica una predominancia absoluta del género Action en el catálogo, seguido a considerable distancia por Role-Playing y Sports, mientras que géneros como Platform, Shooter y Fighting mantienen una presencia media, y categorías como Simulation, Puzzle y Strategy representan una proporción minoritaria dentro de la oferta total de juegos.</p>
+</section>
+<section id="generos-más-vendidos-en-consolas-japonesas" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="generos-más-vendidos-en-consolas-japonesas"><span class="header-section-number">4.2.3</span> Generos más vendidos en consolas Japonesas</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ventas-generos-japoneses-tiempo-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Evolución de ventas por género en consolas japonesas (1986-2016)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando la evolución de ventas de los géneros más exitosos en consolas japonesas, se observa que el género Action mantiene un dominio constante a lo largo de todo el período, mostrando un notable crecimiento hasta alcanzar su pico alrededor de 2005-2006, mientras que Role-Playing y Platform emergen como categorías secundarias significativas, y géneros como Sports y Misc presentan volúmenes de ventas considerablemente menores en comparación.</p>
+</section>
+<section id="penetración-de-percado-asia-vs.-resto-del-mundo" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="penetración-de-percado-asia-vs.-resto-del-mundo"><span class="header-section-number">4.2.4</span> Penetración de percado: Asia vs.&nbsp;Resto del Mundo</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/mercado-japonesas-domestico-internacional-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Comparación de ventas domésticas vs internacionales de consolas Japonesas</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando la penetración de mercado de las consolas japonesas, se evidencia una distribución comercial radicalmente opuesta, donde las ventas en el Resto del Mundo superan abrumadoramente a las registradas en el mercado doméstico Asiatico, reflejando el éxito global masivo y la amplia internacionalización alcanzada por estas plataformas durante el período analizado.</p>
+</section>
+</section>
+<section id="estados-unidos-vs-japón-análisis-de-ventas-cruzadas" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="estados-unidos-vs-japón-análisis-de-ventas-cruzadas"><span class="header-section-number">4.3</span> Estados Unidos vs Japón: Análisis de ventas cruzadas</h2>
+<section id="ventas-de-juegos-de-consolas-estadounidenses-en-asia" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="ventas-de-juegos-de-consolas-estadounidenses-en-asia"><span class="header-section-number">4.3.1</span> Ventas De Juegos de Consolas Estadounidenses en Asia</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ventas-americanas-en-japon-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Ventas de juegos de consolas Estadounidenses en Asia (1986–2016)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando las ventas de juegos para consolas Estadounidenses en el mercado Asiatico, se observa una presencia extremadamente limitada durante todo el período de estudio, con volúmenes de ventas marginales que se mantienen cercanos a cero desde 1986 hasta 2016, lo que demuestra la nula penetración comercial de estas plataformas en el territorio.</p>
+</section>
+<section id="ventas-de-juegos-de-consolas-japonesas-en-america" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="ventas-de-juegos-de-consolas-japonesas-en-america"><span class="header-section-number">4.3.2</span> Ventas de juegos de consolas Japonesas en America</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ventas-japonesas-en-usa-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Ventas de juegos de consolas Japonesas en America (1986–2016)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando las ventas de juegos para consolas Japonesas en el mercado Americano, se identifica un crecimiento sostenido y masivo desde 1986, con un pronunciado ascenso que culmina en un pico máximo alrededor de 2006, seguido de una fase de contracción progresiva hasta 2016, evidenciando una penetración comercial profundamente exitosa y una influencia dominante en el mercado americano durante tres décadas.</p>
+</section>
+<section id="análisis-de-penetración-comercial-cruzada-consolas-japonesas-en-america-y-consolas-estadounidenses-en-asia" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="análisis-de-penetración-comercial-cruzada-consolas-japonesas-en-america-y-consolas-estadounidenses-en-asia"><span class="header-section-number">4.3.3</span> Análisis de penetración comercial cruzada: consolas Japonesas en America y consolas Estadounidenses en Asia</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ventas-cruzadas-comparativo-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Comparativo de ventas cruzadas entre consolas Japonesas y Estadounidenses (1986–2016)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando de manera comparativa las ventas cruzadas entre ambos mercados, se constata una asimetría absoluta en la penetración comercial: mientras las consolas japonesas en America registraron volúmenes de ventas masivos con un ciclo de crecimiento, auge y declive bien definido, las consolas Estadounidenses en Asia mostraron una presencia irrelevante durante todo el período, evidenciando que el flujo comercial de videojuegos fue predominantemente unidireccional, de Japón hacia América.</p>
+</section>
+<section id="ventas-de-juegos-de-consolas-estadounidenses-y-japonesas-en-europa" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="ventas-de-juegos-de-consolas-estadounidenses-y-japonesas-en-europa"><span class="header-section-number">4.3.4</span> Ventas de juegos de consolas Estadounidenses y Japonesas en Europa</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ventas-europa-origen-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Ventas en Europa de consolas Estadounidenses y Japonesas (1986–2016)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Analizando las ventas en el mercado europeo, se observa que las consolas Japonesas dominaron ampliamente durante todo el período, mostrando un ciclo comercial robusto con un crecimiento sostenido hasta alcanzar su pico alrededor de 2006, mientras que las consolas Estadounidenses mantuvieron una presencia marginal con volúmenes de ventas significativamente inferiores, reflejando que Europa constituyó un mercado tradicionalmente favorable para los productos de origen Japonés.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Conclusion</h1>
+<p>El análisis realizado confirma la posición pionera y dominante de Japón en la industria global de los videojuegos durante el período 1986-2016. Desde sus inicios, el mercado Japonés demostró una clara orientación hacia la internacionalización, con un catálogo de géneros que, curiosamente, no presenta diferencias significativas con el Estadounidense en cuanto a preferencias básicas —ambos mercados comparten al Accion como género líder— pero que logró una penetración masiva y sostenida en mercados clave como América y Europa. Este éxito global se refleja no solo en el volumen de ventas, sino en la capacidad de sus consolas para mantenerse relevantes durante tres décadas, consolidando un ecosistema dirigido al consumidor global.</p>
+<p>Por su parte, el mercado Estadounidense, con su entrada tardía a la industria de consolas y un número significativamente menor de plataformas desarrolladas, parecería haber adoptado un enfoque regional u occidental como estrategia principal. Este enfoque se refleja en un catálogo especializado que, si bien comparte géneros predominantes con Japón como Action, mostró un desarrollo particularmente intensivo en Shooter, género que resonó fuertemente en los mercados norteamericano y europeo occidental pero tuvo una aceptación limitada en Asia.</p>
+<p>El caso de Europa resulta particularmente ilustrativo de este fenómeno, donde si bien las consolas Japonesas mantuvieron su dominio, las consolas americanas lograron una penetración significativamente mayor que en territorio japonés, lo que sugiere cierta sintonía cultural con el mercado occidental. Esta asimetría refleja no solo diferencias en estrategia comercial, sino también en cultura de desarrollo, legado histórico y momento de entrada al mercado. Mientras Japón construyó un modelo genuinamente global a lo largo de décadas, Estados Unidos —con menos consolas y un inicio tardío— parecería haber optado por una estrategia focalizada en mercados occidentales, lo que permitió a las compañías Japonesas mantener su influencia y liderazgo a escala global durante la mayor parte de las tres décadas analizadas, demostrando que el éxito internacional no radica tanto en la elección de géneros sino en la capacidad de adaptación, tradición industrial y comprensión de las dinámicas culturales particulares de cada mercado.</p>
 </section>
 
 </main>
@@ -192,12 +451,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiado");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Copiado");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",

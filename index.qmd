@@ -1,0 +1,542 @@
+---
+title: "Analisis de Penetración Cruzada de Videojuegos entre América y Japon (1986-2016)"
+author: "Matias Villanueva"
+date: last-modified
+lang: es
+format: 
+  html:
+    theme: flatly  
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-fold: true
+    page-layout: full
+---
+
+# Introducción
+
+El mercado de videojuegos ha experimentado un crecimiento exponencial desde sus inicios, convirtiéndose en una de las industrias de entretenimiento más lucrativas a nivel global. Dos de los actores más significativos han sido históricamente **Estados Unidos** y **Japón**, naciones que han desarrollado consolas icónicas y cultivado audiencias masivas.
+
+Este estudio busca analizar la dinámica comercial entre estos dos mercados clave durante el período **1986-2016**, específicamente investigando cómo las ventas de videojuegos variaron según el origen de las consolas y las regiones de comercialización. El análisis se centra en los **impacto de ventas cruzadas entre estas regiones**.
+
+------------------------------------------------------------------------
+
+# Materiales y métodos
+
+## Fuente de datos
+
+Para este análisis se utilizó el dataset *"Video Game Sales"*, que contiene información histórica sobre ventas de videojuegos desde **1980 hasta 2016**, con cobertura comprehensiva del período de interés.
+
+## Variables utilizadas
+
+Del dataset original se emplearon las siguientes variables:
+
+-   **Nombre del juego (Name):** Identificador del título\
+-   **Plataforma (Platform):** Consola de destino\
+-   **Año de lanzamiento (Year):** Período 1986-2016\
+-   **Género (Genre):** Categorización del juego\
+-   **Publicador (Publisher):** Empresa distribuidora\
+-   **Ventas regionales:** `NA_Sales` (América del Norte), `JP_Sales` (Japón)\
+-   **Ventas globales (Global_Sales):** Total mundial
+
+## Criterios de selección
+
+Se aplicaron los siguientes filtros:
+
+-   **Período temporal:** 1986-2016\
+-   **Clasificación de consolas por origen:**
+    -   Consolas **americanas:** Xbox, Xbox 360, Xbox One\
+    -   Consolas **japonesas:** Nintendo (NES, SNES, N64, GameCube, Wii), Sony (PlayStation, PS2, PS3, PS4), Sega (Genesis, Saturn, DreamCast)\
+-   **Exclusión** de plataformas PC y móviles para focalizar en el mercado de consolas
+
+------------------------------------------------------------------------
+
+# Procesamiento de datos
+
+## Limpieza de datos
+
+1.  **Manejo de valores fuera de rango:**
+    -   Eliminación de registros con año fuera de rango\
+2.  **Clasificación de plataformas:**
+    -   Asignación sistemática de cada plataforma a su país de origen\
+    -   Validación con fuentes históricas de la industria
+3.  **Exclusion de datos fuera del estudio:**
+    -   Filtrado de plataformas no relevantes (PC, móviles)\
+
+------------------------------------------------------------------------
+
+## Enfoque analítico
+
+El análisis se centrará en:
+
+-   Comparar **volúmenes de ventas entre regiones (NA vs JP)**\
+-   Analizar **diferencias en preferencias de género por región**\
+-   Evaluar el **desempeño comercial cruzado** (juegos en consolas americanas en Japón vs juegos en consolas japonesas en América)\
+-   Identificar **tendencias temporales en la penetración comercial entre mercados**
+
+```{r}
+#| label: procesamiento
+#| message: false
+#| warning: false
+#| echo: false
+
+library(tidyverse)
+library(ggplot2)
+library(scales)
+
+# Leer y procesar los datos
+video_game_sales <- read.csv("input/vgsales.csv")
+
+# Función para asignar continente según consola
+assign_origin_to_console <- function(platform) {
+  case_when(
+    platform %in% c(
+      "NES", "SNES", "N64", "GC", "Wii", "WiiU", "GB", "GBA", "DS", "3DS",
+      "PS", "PS2", "PS3", "PS4", "PSP", "PSV",
+      "GEN", "SAT", "DC", "GG", "SCD",
+      "NG", "TG16", "WS", "PCFX"
+    ) ~ "Asia",
+    platform %in% c("XB", "X360", "XOne", "2600", "3DO") ~ "North America",
+    TRUE ~ "Unknown"
+  )
+}
+
+# Filtrar y agregar columna de origen de origen de la consola.
+video_game_sales <- video_game_sales %>%
+  mutate(ConsoleOrigin = assign_origin_to_console(Platform)) %>%
+  filter(Year >= 1986 & Year <= 2016, Platform != "PC")
+```
+
+---
+
+# Análisis de datos
+
+## Desempeño de consolas Estadounidenses
+
+### Evolución temporal de ventas
+
+```{r}
+#| label: ventas-americanas-tiempo
+#| fig-cap: "Evolución anual de ventas de videojuegos en consolas Estadounidenses (1986-2016)"
+#| echo: false
+#| message: false
+#| warning: false
+
+american_sales_time <- video_game_sales %>%
+filter(ConsoleOrigin == "North America") %>%
+mutate(Year = as.numeric(Year)) %>%
+ggplot(aes(x = Year, weight = Global_Sales)) +
+geom_histogram(
+bins = 20,                        
+fill = "#1f77b4",               
+alpha = 0.6,
+color = "white"
+) +
+labs(
+title = "Distribución de Ventas en el Tiempo - Consolas Americanas",
+x = "Año", y = "Ventas ponderadas (millones)"
+) +
+scale_x_continuous(breaks = seq(1986, 2016, by = 5)) 
+
+american_sales_time
+```
+
+Analizando el gráfico de la evolución temporal de ventas para consolas Estadounidenses, se observa una trayectoria comercial caracterizada por un inicio tardío, con ventas insignificantes durante la década de 1990, seguido de un crecimiento explosivo a partir de 2001 —coincidiendo con el lanzamiento de la primera Xbox— que culmina en un pico máximo alrededor de 2006, para luego entrar en una fase de declive pronunciado y continuo hasta el final del período de estudio en 2016, reflejando así un ciclo de vida de mercado concentrado principalmente en la primera década del siglo XXI.
+
+### Distribución de géneros desarrollados
+
+```{r}
+#| label: generos-estadounidenses-cantidad
+#| fig-cap: "Cantidad de juegos por género desarrollados para consolas Estadounidenses"
+#| echo: false
+#| message: false
+#| warning: false
+
+american_genres_count <- video_game_sales %>% 
+  filter(ConsoleOrigin == "North America") %>%
+  count(Genre) %>%
+  ggplot(aes(x = n, y = reorder(Genre, n), fill = Genre)) +
+  geom_col(show.legend = FALSE) +
+  labs(title = "Cantidad de Juegos por Género - Consolas Americanas",
+       x = "Cantidad de Juegos", y = "Género") +
+  scale_fill_discrete() +
+  scale_x_continuous(labels = scales::comma)
+
+american_genres_count
+```
+
+Analizando la distribución de géneros desarrollados para consolas Estadounidenses, se observa una marcada concentración en tres categorías principales: Action, Sports y Shooter, que dominan significativamente el catálogo disponible, seguidos por géneros secundarios como Racing y Misc, mientras que categorías como Strategy, Puzzle y Simulation presentan una presencia marginal,
+
+### Generos más vendidos en consolas Estadounidenses
+
+```{r}
+#| label: ventas-generos-americanos-tiempo
+#| fig-cap: "Evolución de ventas por género en consolas Estadounidenses (1986-2016)"
+#| echo: false
+#| message: false
+#| warning: false
+#| results: "hide"
+
+american_genres_sales_time <- video_game_sales %>% 
+  filter(ConsoleOrigin == "North America") %>%
+  mutate(Year = as.numeric(as.character(Year))) %>%
+  group_by(Year, Genre) %>%
+  summarise(Total_Sales = sum(Global_Sales, na.rm = TRUE), .groups = "drop")
+
+top_genres <- american_genres_sales_time %>%
+  group_by(Genre) %>%
+  summarise(Total = sum(Total_Sales)) %>%
+  arrange(desc(Total)) %>%
+  slice_head(n = 5) %>%
+  pull(Genre)
+
+american_genres_sales_time %>%
+  filter(Genre %in% top_genres) %>%
+  ggplot(aes(x = Year, y = Total_Sales, fill = Genre)) +
+  geom_area(alpha = 0.8, size = 0.1, colour = "white") +
+  scale_fill_viridis_d(option = "C") +
+  scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = "Evolución de Ventas - Top 5 Géneros (Consolas Estadounidenses)",
+    x = "Año", y = "Ventas Globales (millones)",
+    fill = "Género"
+  )
+
+american_genres_sales_time
+```
+
+Analizando la evolución de ventas de los géneros más exitosos en consolas Estadounidenses, se observa que el género Shooter experimenta un crecimiento explosivo a partir de 2001, convirtiéndose en la categoría dominante y alcanzando su pico máximo alrededor de 2010, mientras que Action mantiene un desempeño constante como segunda categoría en importancia, y géneros como Sports, Racing y Misc presentan volúmenes de ventas significativamente menores a lo largo de todo el período.
+
+### Penetración de mercado: América vs. Resto del Mundo
+
+```{r}
+#| label: mercado-americanas-domestico-internacional
+#| fig-cap: "Comparación de ventas domésticas vs internacionales de consolas Estadounidenses"
+#| echo: false
+#| message: false
+#| warning: false
+
+american_market_penetration <- video_game_sales %>% 
+  filter(ConsoleOrigin == "North America") %>%
+  summarise(
+    NA_Sales = sum(NA_Sales, na.rm = TRUE),
+    Other_Sales = sum(Global_Sales, na.rm = TRUE) - sum(NA_Sales, na.rm = TRUE)
+  ) %>%
+  tidyr::pivot_longer(cols = everything(), names_to = "Market", values_to = "Sales") %>%
+  mutate(
+    Market = factor(
+      Market,
+      levels = c("NA_Sales", "Other_Sales"),
+      labels = c("América", "Resto del Mundo")
+    )
+  ) %>%
+  ggplot(aes(x = Market, y = Sales, fill = Market)) +
+  geom_col(alpha = 0.8) + 
+  scale_fill_manual(
+    values = c("América" = "#1f77b4", 
+               "Resto del Mundo"   = "#4ecdc4") 
+  ) +
+  labs(
+    title = "Penetración de Mercado - Consolas Estadounidenses",
+    x = "Mercado", y = "Ventas (millones)"
+  ) +
+  theme(legend.position = "none")
+
+american_market_penetration
+```
+
+Analizando la penetración de mercado de las consolas Estadounidenses, se observa una marcada predominancia de las ventas en América, que superan significativamente a las registradas en el Resto del Mundo, lo que indica que el éxito comercial de estas plataformas se concentró principalmente en su mercado doméstico durante el período de estudio.
+
+## Desempeño de Consolas Japonesas
+
+### Evolución temporal de ventas
+
+```{r}
+#| label: ventas-japonesas-tiempo
+#| fig-cap: "Evolución anual de ventas de videojuegos en consolas Japonesas (1986-2016)"
+#| echo: false
+#| message: false
+#| warning: false
+
+japanese_sales_time <- video_game_sales %>%
+filter(ConsoleOrigin == "Asia") %>%
+mutate(Year = as.numeric(Year)) %>%
+ggplot(aes(x = Year, weight = Global_Sales)) +
+geom_histogram(
+bins = 20,
+fill = "#d62728", 
+alpha = 0.6,
+color = "white"
+) +
+labs(
+title = "Distribución de Ventas en el Tiempo - Consolas Japonesas",
+x = "Año", y = "Ventas ponderadas (millones)"
+) +
+scale_x_continuous(breaks = seq(1986, 2016, by = 5))
+
+japanese_sales_time
+```
+
+Analizando el gráfico de la evolución temporal de ventas para consolas Japonesas, se observa una trayectoria comercial con un crecimiento constante desde 1986 que alcanza su máximo histórico alrededor de 2005-2006, seguido de una fase de declive progresivo hasta el final del período estudiado en 2016, mostrando un ciclo de vida extenso que abarca tres décadas completas de presencia en el mercado.
+
+### Distribución de géneros desarrollados
+
+```{r}
+#| label: generos-japoneses-cantidad
+#| fig-cap: "Cantidad de juegos por género desarrollados para consolas Japonesas"
+#| echo: false
+#| message: false
+#| warning: false
+
+japanese_genres_count <- video_game_sales %>%
+filter(ConsoleOrigin == "Asia") %>%
+count(Genre) %>%
+ggplot(aes(x = n, y = reorder(Genre, n), fill = Genre)) +
+geom_col(show.legend = FALSE) +
+labs(title = "Cantidad de Juegos por Género - Consolas Japonesas",
+x = "Cantidad de Juegos", y = "Género") +
+scale_fill_discrete() +
+scale_x_continuous(labels = scales::comma)
+
+japanese_genres_count
+```
+
+Analizando la distribución de géneros desarrollados para consolas Japonesas, se identifica una predominancia absoluta del género Action en el catálogo, seguido a considerable distancia por Role-Playing y Sports, mientras que géneros como Platform, Shooter y Fighting mantienen una presencia media, y categorías como Simulation, Puzzle y Strategy representan una proporción minoritaria dentro de la oferta total de juegos.
+
+### Generos más vendidos en consolas Japonesas
+
+```{r}
+#| label: ventas-generos-japoneses-tiempo
+#| fig-cap: "Evolución de ventas por género en consolas japonesas (1986-2016)"
+#| echo: false
+#| message: false
+#| warning: false
+
+japanese_genres_sales_time_df <- video_game_sales %>%
+filter(ConsoleOrigin == "Asia") %>%
+mutate(Year = as.numeric(as.character(Year))) %>%
+group_by(Year, Genre) %>%
+summarise(Total_Sales = sum(Global_Sales, na.rm = TRUE), .groups = "drop")
+
+top_genres_jp <- japanese_genres_sales_time_df %>%
+group_by(Genre) %>%
+summarise(Total = sum(Total_Sales)) %>%
+arrange(desc(Total)) %>%
+slice_head(n = 5) %>%
+pull(Genre)
+
+japanese_genres_sales_time <- japanese_genres_sales_time_df %>%
+filter(Genre %in% top_genres_jp) %>%
+ggplot(aes(x = Year, y = Total_Sales, fill = Genre)) +
+geom_area(alpha = 0.8, size = 0.1, colour = "white") +
+scale_fill_viridis_d(option = "C") +
+scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+scale_y_continuous(labels = scales::comma) +
+labs(
+title = "Evolución de Ventas - Top 5 Géneros (Consolas Japonesas)",
+x = "Año", y = "Ventas Globales (millones)",
+fill = "Género"
+)
+
+japanese_genres_sales_time
+```
+
+Analizando la evolución de ventas de los géneros más exitosos en consolas japonesas, se observa que el género Action mantiene un dominio constante a lo largo de todo el período, mostrando un notable crecimiento hasta alcanzar su pico alrededor de 2005-2006, mientras que Role-Playing y Platform emergen como categorías secundarias significativas, y géneros como Sports y Misc presentan volúmenes de ventas considerablemente menores en comparación.
+
+### Penetración de percado: Asia vs. Resto del Mundo
+
+```{r}
+#| label: mercado-japonesas-domestico-internacional
+#| fig-cap: "Comparación de ventas domésticas vs internacionales de consolas Japonesas"
+#| echo: false
+#| message: false
+#| warning: false
+
+japanese_market_penetration <- video_game_sales %>%
+filter(ConsoleOrigin == "Asia") %>%
+summarise(
+JP_Sales = sum(JP_Sales, na.rm = TRUE),
+Other_Sales = sum(Global_Sales, na.rm = TRUE) - sum(JP_Sales, na.rm = TRUE)
+) %>%
+tidyr::pivot_longer(cols = everything(), names_to = "Market", values_to = "Sales") %>%
+mutate(
+Market = factor(
+Market,
+levels = c("JP_Sales", "Other_Sales"),
+labels = c("Asia", "Resto del Mundo")
+)
+) %>%
+ggplot(aes(x = Market, y = Sales, fill = Market)) +
+geom_col(alpha = 0.8) +
+scale_fill_manual(
+values = c("Japón" = "#d62728",
+"Resto del Mundo" = "#4ecdc4") 
+) +
+labs(
+title = "Penetración de Mercado - Consolas Japonesas",
+x = "Mercado", y = "Ventas (millones)"
+) +
+theme(legend.position = "none")
+
+japanese_market_penetration
+```
+
+Analizando la penetración de mercado de las consolas japonesas, se evidencia una distribución comercial radicalmente opuesta, donde las ventas en el Resto del Mundo superan abrumadoramente a las registradas en el mercado doméstico Asiatico, reflejando el éxito global masivo y la amplia internacionalización alcanzada por estas plataformas durante el período analizado.
+
+## Estados Unidos vs Japón: Análisis de ventas cruzadas
+
+### Ventas De Juegos de Consolas Estadounidenses en Asia
+
+```{r}
+#| label: ventas-americanas-en-japon
+#| fig-cap: "Ventas de juegos de consolas Estadounidenses en Asia (1986–2016)"
+#| echo: false
+#| message: false
+#| warning: false
+
+american_in_japan <- video_game_sales %>%
+filter(ConsoleOrigin == "North America") %>%
+mutate(Year = as.numeric(Year)) %>%
+group_by(Year) %>%
+summarise(Sales_Japan = sum(JP_Sales, na.rm = TRUE), .groups = "drop") %>%
+ggplot(aes(x = Year, y = Sales_Japan)) +
+geom_line(color = "#1f77b4", linewidth = 1.2) +
+geom_point(color = "#1f77b4", size = 2) +
+scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+scale_y_continuous(labels = scales::comma) +
+labs(
+title = "Ventas de Juegos de Consolas Estadounidenses en Asia",
+x = "Año", y = "Ventas (millones)"
+)
+
+american_in_japan
+```
+Analizando las ventas de juegos para consolas Estadounidenses en el mercado Asiatico, se observa una presencia extremadamente limitada durante todo el período de estudio, con volúmenes de ventas marginales que se mantienen cercanos a cero desde 1986 hasta 2016, lo que demuestra la nula penetración comercial de estas plataformas en el territorio.
+
+### Ventas de juegos de consolas Japonesas en America
+
+```{r}
+#| label: ventas-japonesas-en-usa
+#| fig-cap: "Ventas de juegos de consolas Japonesas en America (1986–2016)"
+#| echo: false
+#| message: false
+#| warning: false
+
+japanese_in_usa <- video_game_sales %>%
+filter(ConsoleOrigin == "Asia") %>%
+mutate(Year = as.numeric(Year)) %>%
+group_by(Year) %>%
+summarise(Sales_USA = sum(NA_Sales, na.rm = TRUE), .groups = "drop") %>%
+ggplot(aes(x = Year, y = Sales_USA)) +
+geom_line(color = "#d62728", linewidth = 1.2) +
+geom_point(color = "#d62728", size = 2) +
+scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+scale_y_continuous(labels = scales::comma) +
+labs(
+title = "Ventas de Juegos de Consolas Japonesas en America",
+x = "Año", y = "Ventas (millones)"
+)
+
+japanese_in_usa
+```
+
+Analizando las ventas de juegos para consolas Japonesas en el mercado Americano, se identifica un crecimiento sostenido y masivo desde 1986, con un pronunciado ascenso que culmina en un pico máximo alrededor de 2006, seguido de una fase de contracción progresiva hasta 2016, evidenciando una penetración comercial profundamente exitosa y una influencia dominante en el mercado americano durante tres décadas.
+
+### Análisis de penetración comercial cruzada: consolas Japonesas en America y consolas Estadounidenses en Asia
+
+```{r}
+#| label: ventas-cruzadas-comparativo
+#| fig-cap: "Comparativo de ventas cruzadas entre consolas Japonesas y Estadounidenses (1986–2016)"
+#| echo: false
+#| message: false
+#| warning: false
+
+cross_market <- video_game_sales %>%
+mutate(Year = as.numeric(Year)) %>%
+summarise(
+JP_in_USA = sum(NA_Sales[ConsoleOrigin == "Asia"], na.rm = TRUE),
+US_in_JP = sum(JP_Sales[ConsoleOrigin == "North America"], na.rm = TRUE),
+.groups = "drop"
+)
+
+cross_market_by_year <- video_game_sales %>%
+mutate(Year = as.numeric(Year)) %>%
+group_by(Year) %>%
+summarise(
+JP_in_USA = sum(ifelse(ConsoleOrigin == "Asia", NA_Sales, 0), na.rm = TRUE),
+US_in_JP = sum(ifelse(ConsoleOrigin == "North America", JP_Sales, 0), na.rm = TRUE),
+.groups = "drop"
+) %>%
+tidyr::pivot_longer(cols = c(JP_in_USA, US_in_JP),
+names_to = "Flow", values_to = "Sales") %>%
+mutate(Flow = recode(Flow,
+"JP_in_USA" = "Japonesas en America",
+"US_in_JP" = "Americanas en Asia"))
+
+cross_market_plot <- ggplot(cross_market_by_year,
+aes(x = Year, y = Sales, color = Flow)) +
+geom_line(linewidth = 1.2) +
+geom_point(size = 2) +
+scale_color_manual(values = c("Japonesas en America" = "#d62728",
+"Americanas en Asia" = "#1f77b4")) +
+scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+scale_y_continuous(labels = scales::comma) +
+labs(
+title = "Ventas Cruzadas entre Mercados (1986–2016)",
+x = "Año", y = "Ventas (millones)", color = "Origen → Destino"
+)
+
+cross_market_plot
+```
+
+Analizando de manera comparativa las ventas cruzadas entre ambos mercados, se constata una asimetría absoluta en la penetración comercial: mientras las consolas japonesas en America registraron volúmenes de ventas masivos con un ciclo de crecimiento, auge y declive bien definido, las consolas Estadounidenses en Asia mostraron una presencia irrelevante durante todo el período, evidenciando que el flujo comercial de videojuegos fue predominantemente unidireccional, de Japón hacia América.
+
+### Ventas de juegos de consolas Estadounidenses y Japonesas en Europa
+
+```{r}
+#| label: ventas-europa-origen
+#| fig-cap: "Ventas en Europa de consolas Estadounidenses y Japonesas (1986–2016)"
+#| echo: false
+#| message: false
+#| warning: false
+
+eu_sales_by_origin <- video_game_sales %>%
+filter(ConsoleOrigin %in% c("North America", "Asia")) %>%
+mutate(Year = as.numeric(Year)) %>%
+group_by(Year, ConsoleOrigin) %>%
+summarise(EU_Sales = sum(EU_Sales, na.rm = TRUE), .groups = "drop")
+
+eu_sales_by_origin_plot <- eu_sales_by_origin %>%
+ggplot(aes(x = Year, y = EU_Sales, color = ConsoleOrigin)) +
+geom_line(linewidth = 1.2) +
+geom_point(size = 2) +
+scale_color_manual(
+values = c("North America" = "#1f77b4", # azul América
+"Asia" = "#d62728") # rojo Japón
+) +
+scale_x_continuous(breaks = seq(1986, 2016, by = 5)) +
+scale_y_continuous(labels = scales::comma) +
+labs(
+title = "Ventas en Europa por Origen de Consola",
+x = "Año", y = "Ventas en Europa (millones)",
+color = "Origen de Consola"
+) +
+theme_minimal()
+
+eu_sales_by_origin_plot
+```
+
+Analizando las ventas en el mercado europeo, se observa que las consolas Japonesas dominaron ampliamente durante todo el período, mostrando un ciclo comercial robusto con un crecimiento sostenido hasta alcanzar su pico alrededor de 2006, mientras que las consolas Estadounidenses mantuvieron una presencia marginal con volúmenes de ventas significativamente inferiores, reflejando que Europa constituyó un mercado tradicionalmente favorable para los productos de origen Japonés.
+
+
+------------------------------------------------------------------------
+
+# Conclusion
+
+El análisis realizado confirma la posición pionera y dominante de Japón en la industria global de los videojuegos durante el período 1986-2016. Desde sus inicios, el mercado Japonés demostró una clara orientación hacia la internacionalización, con un catálogo de géneros que, curiosamente, no presenta diferencias significativas con el Estadounidense en cuanto a preferencias básicas —ambos mercados comparten al Accion como género líder— pero que logró una penetración masiva y sostenida en mercados clave como América y Europa. Este éxito global se refleja no solo en el volumen de ventas, sino en la capacidad de sus consolas para mantenerse relevantes durante tres décadas, consolidando un ecosistema dirigido al consumidor global.
+
+Por su parte, el mercado Estadounidense, con su entrada tardía a la industria de consolas y un número significativamente menor de plataformas desarrolladas, parecería haber adoptado un enfoque regional u occidental como estrategia principal. Este enfoque se refleja en un catálogo especializado que, si bien comparte géneros predominantes con Japón como Action, mostró un desarrollo particularmente intensivo en Shooter, género que resonó fuertemente en los mercados norteamericano y europeo occidental pero tuvo una aceptación limitada en Asia.
+
+El caso de Europa resulta particularmente ilustrativo de este fenómeno, donde si bien las consolas Japonesas mantuvieron su dominio, las consolas americanas lograron una penetración significativamente mayor que en territorio japonés, lo que sugiere cierta sintonía cultural con el mercado occidental. Esta asimetría refleja no solo diferencias en estrategia comercial, sino también en cultura de desarrollo, legado histórico y momento de entrada al mercado. Mientras Japón construyó un modelo genuinamente global a lo largo de décadas, Estados Unidos —con menos consolas y un inicio tardío— parecería haber optado por una estrategia focalizada en mercados occidentales, lo que permitió a las compañías Japonesas mantener su influencia y liderazgo a escala global durante la mayor parte de las tres décadas analizadas, demostrando que el éxito internacional no radica tanto en la elección de géneros sino en la capacidad de adaptación, tradición industrial y comprensión de las dinámicas culturales particulares de cada mercado.
+
